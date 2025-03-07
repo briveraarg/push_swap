@@ -73,7 +73,7 @@ El programa utiliza diferentes estrategias de ordenación según la cantidad de 
   ```
   Para generar los índices, se usa la función:
   ```c
-  void load_index_with_timsort(t_stack *stack_a);
+  load_index_with_timsort(t_stack *stack_a);
   ```
 
 ### Operaciones permitidas
