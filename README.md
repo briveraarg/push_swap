@@ -1,17 +1,20 @@
-# push_swap
-Swap_push no es tan natural
-
 # Push_swap
 
-Push_swap es un programa en C diseñado para ordenar una pila de números utilizando un conjunto de operaciones específicas. Es un desafío común en la escuela 42 y tiene como objetivo optimizar el número de movimientos necesarios para ordenar la pila.
+Push_swap es un programa en C diseñado para ordenar una pila de números utilizando un conjunto de operaciones específicas. Es un desafío común en 42 Madrid y tiene como objetivo optimizar el número de movimientos necesarios para ordenar la pila.
 
 ## Características
 
-- Implementación de un algoritmo eficiente para ordenar una pila.
+- Implementación de un algoritmo óptimo para ordenar una pila.
 - Soporte para operaciones básicas de manipulación de pilas.
 - Versión adicional con verificación interactiva (*bonus*).
 
 ## Instalación
+
+Clona el repositorio:
+
+```sh
+git clone https://github.com/tusuario/push_swap.git
+```
 
 Para compilar el proyecto, usa el siguiente comando:
 
@@ -23,18 +26,6 @@ Esto generará el ejecutable `push_swap`. Para compilar la versión bonus, usa:
 
 ```sh
 make bonus
-```
-
-Para limpiar archivos intermedios y objetos:
-
-```sh
-make clean
-```
-
-Para limpiar completamente los binarios generados:
-
-```sh
-make fclean
 ```
 
 Para recompilar desde cero:
@@ -51,18 +42,41 @@ Ejecuta el programa pasando una serie de números como argumentos:
 ./push_swap 4 67 3 87 23
 ```
 
-Esto imprimirá la secuencia de movimientos necesarios para ordenar la pila.
+Para verificar el resultado con el *checker* correspondiente a tu sistema operativo:
 
-### Algoritmo de Ordenación
+```sh
+ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_SO $ARG
+```
+
+Esto imprimirá la secuencia de movimientos necesarios para ordenar la pila y el *checker* comprobará si está todo OK.
+
+## Estrategias para ordenar
 
 El programa utiliza diferentes estrategias de ordenación según la cantidad de números recibidos:
 
 - Para `argv = 3`, se usa una simple comparación y swap si es necesario.
-- Para `argv = 4`, se emplea una estrategia específica basada en swaps y rotaciones mínimas.
-- Para `argv = 5` a `argv = 8`, se usa un algoritmo más estructurado con una mezcla de particionamiento y movimientos optimizados.
-- Para `argv >= 9`, se implementa una estrategia basada en `ksort`, un método que divide los elementos en grupos, facilitando el ordenamiento mediante el uso eficiente de las operaciones permitidas.
+  ```c
+  stack_sort_three(stack_a);
+  ```
+- Para `argv = 4`, se emplea una estrategia basada en swaps y rotaciones mínimas.
+  ```c
+  stack_sort_four(stack_a, &stack_b);
+  ```
+- Para `argv = 5` a `argv = 8`, se usa una función más estructurada que emplea índices con una mezcla de particionamiento y movimientos optimizados.
+  ```c
+  stack_sort_five_and_eight(stack_a, stack_b, lim);
+  ```
+- Para `argv >= 9`, se implementa una estrategia basada en `ksort`, que divide los elementos en grupos de acuerdo a un rango, facilitando el ordenamiento mediante el uso de índices con las operaciones permitidas.
+  ```c
+  k_sort_phase_one(stack_a, stack_b);
+  k_sort_phase_two(stack_a, stack_b, size_a);
+  ```
+  Para generar los índices, se usa la función:
+  ```c
+  void load_index_with_timsort(t_stack *stack_a);
+  ```
 
-Las operaciones permitidas son:
+### Operaciones permitidas
 
 - `sa` (swap a): Intercambia los dos primeros elementos de la pila A.
 - `sb` (swap b): Intercambia los dos primeros elementos de la pila B.
@@ -76,24 +90,57 @@ Las operaciones permitidas son:
 - `rrb` (reverse rotate b): Desplaza todos los elementos de la pila B hacia abajo.
 - `rrr` (reverse rotate a y b): Realiza `rra` y `rrb` simultáneamente.
 
-### Pruebas de Rendimiento
+## Pruebas de rendimiento
 
 Para validar este proyecto, se deben realizar pruebas de rendimiento con un número mínimo de operaciones:
 
-- Para una validación mínima del proyecto (nota mínima de 80), el programa debe ser capaz de ordenar 100 números aleatorios en menos de 700 operaciones.
-- Para una validación máxima del proyecto y obtener los bonus, además de cumplir el primer requisito, también debe ordenar 500 números aleatorios sin superar las 5500 operaciones.
+- Para una validación mínima (nota 80), el programa debe ordenar 100 números aleatorios en menos de 700 operaciones.
+- Para una validación máxima y obtener los *bonus*, además de cumplir el primer requisito, también debe ordenar 500 números aleatorios sin superar las 5500 operaciones.
 
-### Checker (Bonus)
+Para hacer pruebas exhaustivas, puedes usar el siguiente script:
 
-También se incluye un programa `checker_bonus` que verifica si la secuencia de movimientos aplicada ordena correctamente la pila:
+```bash
+#!/bin/bash
 
-```sh
-ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_bonus $ARG
+best=999999
+worst=0
+
+for i in $(seq 1 100); do
+    ARG=$(shuf <(seq -5000 5000) -n 500)
+    lines=$(./push_swap $ARG | wc -l)
+    test=$(./push_swap $ARG | ./checker_linux $ARG)
+    echo "Ejecución $i: $lines líneas"
+    echo "Ejecución $i: $test checker"
+
+    if [ "$test" == "KO" ]; then
+        echo -e "\033[31mError\033[0m"
+    fi
+
+    if [ $lines -lt $best ]; then
+        best=$lines
+    fi
+
+    if [ $lines -gt $worst ]; then
+        worst=$lines
+    fi
+
+done
+
+echo "Mejor número de líneas: $best"
+echo "Peor número de líneas: $worst"
 ```
 
-Si la secuencia es correcta, mostrará `OK`, de lo contrario, `KO`.
+## Checker (Bonus)
 
-## Estructura del Proyecto
+El proyecto incluye un *checker* que verifica si la secuencia de movimientos aplicada ordena correctamente la pila:
+
+```sh
+ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
+```
+
+Si la secuencia es correcta, mostrará `OK`, de lo contrario, `KO` o `Error` si los argumentos son incorrectos.
+
+## Estructura del proyecto
 
 - `src/` - Implementación principal del algoritmo y funciones auxiliares.
 - `bonus/` - Implementación de la versión interactiva.
@@ -101,9 +148,15 @@ Si la secuencia es correcta, mostrará `OK`, de lo contrario, `KO`.
 - `libs/libft/` - Biblioteca estándar personalizada.
 - `Makefile` - Script para compilar el proyecto.
 
-## Autores
+## Recomendación
 
-Proyecto desarrollado por **Brenda Rivera** como parte del programa de la escuela 42.
+Si necesitas más información, te recomiendo leer la documentación de Oliver, ya que explica en detalle cada parte del proyecto. No dudes en darle una estrella:
+
+[https://github.com/oliverkingz/push_swap](https://github.com/oliverkingz/push_swap)
+
+## Autora
+
+Proyecto desarrollado por **Brenda Rivera** como parte del programa de 42 Madrid.
 
 ## Licencia
 
