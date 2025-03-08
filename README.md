@@ -97,7 +97,7 @@ Para validar este proyecto, se deben realizar pruebas de rendimiento con un núm
 - Para una validación mínima (nota 80), el programa debe ordenar 100 números aleatorios en menos de 700 operaciones.
 - Para una validación máxima y obtener los *bonus*, además de cumplir el primer requisito, también debe ordenar 500 números aleatorios sin superar las 5500 operaciones.
 
-Para hacer pruebas exhaustivas, puedes usar el siguiente script:
+Para hacer pruebas de forma sistematica, puedes usar el siguiente script:
 
 ```bash
 #!/bin/bash
@@ -136,6 +136,12 @@ El proyecto incluye un *checker* que verifica si la secuencia de movimientos apl
 
 ```sh
 ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
+```
+
+```sh
+ ./checker 2 1 7
+sa
+OK
 ```
 
 Si la secuencia es correcta, mostrará `OK`, de lo contrario, `KO` o `Error` si los argumentos son incorrectos.
