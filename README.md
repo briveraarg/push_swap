@@ -149,7 +149,7 @@ Si la secuencia es correcta, mostrará `OK`, de lo contrario, `KO` o `Error` si 
 ## Estructura del proyecto
 
 - `src/` - Implementación principal del algoritmo y funciones auxiliares.
-- `bonus/` - Implementación de la versión interactiva.
+- `bonus/` - Implementación de la versión BONUS del proyecto.
 - `include/` - Archivos de cabecera.
 - `libs/libft/` - Biblioteca estándar personalizada.
 - `Makefile` - Script para compilar el proyecto.
