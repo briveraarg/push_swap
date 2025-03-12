@@ -55,26 +55,26 @@ Esto imprimirá la secuencia de movimientos necesarios para ordenar la pila y el
 El programa utiliza diferentes estrategias de ordenación según la cantidad de números recibidos:
 
 - Para `argv = 3`, se usa una simple comparación y swap si es necesario.
-  ```c
-  [stack_sort_three(stack_a)] (https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
-  ```
+
+  [`stack_sort_three(stack_a`)](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
+  
 - Para `argv = 4`, se emplea una estrategia basada en swaps y rotaciones mínimas.
-  ```c
+  
   [`stack_sort_four(stack_a, &stack_b);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
-  ```
+  
 - Para `argv = 5` a `argv = 8`, se usa una función más estructurada que emplea índices con una mezcla de particionamiento y movimientos optimizados.
-  ```c
+  
   [`stack_sort_five_and_eight(stack_a, stack_b, lim);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
-  ```
+
 - Para `argv >= 9`, se implementa una estrategia basada en `ksort`, que divide los elementos en grupos de acuerdo a un rango, facilitando el ordenamiento mediante el uso de índices con las operaciones permitidas.
-  ```c
+  
   [`k_sort_phase_one(stack_a, stack_b);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_02.c)
   [`k_sort_phase_two(stack_a, stack_b, size_a);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_02.c)
-  ```
+  
   Para generar los índices, se usa la función:
-  ```c
+  
   [`load_index_with_timsort(t_stack *stack_a);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_04.c)
-  ```
+  
 
 ### Operaciones permitidas
 
@@ -158,7 +158,7 @@ Si la secuencia es correcta, mostrará `OK`, de lo contrario, `KO` o `Error` si 
 
 Si necesitas más información, te recomiendo leer la documentación de Oliver, ya que explica en detalle cada parte del proyecto. No dudes en darle una estrella:
 
-[https://github.com/oliverkingz/push_swap](https://github.com/oliverkingz/push_swap)
+[Repositorio de Oli](https://github.com/oliverkingz/push_swap)
 
 ## Autora
 
