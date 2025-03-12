@@ -12,6 +12,25 @@
 
 #include "../include/push_swap.h"
 
+/*
+    The range is multiplied by 1.4 because the results show that increasing
+    the range keeps both the best and worst-case number of lines within 
+    consistent and acceptable margins. 100 tests were conducted for each 
+    range value.
+
+    Results:
+    - Range 1: Best: 4843–4912, Worst: 5234–5269
+    - Range 1.2: Best: 4737–4766, Worst: 5092–5166
+    - Range 1.3: Best: 4725–4748, Worst: 5051–5070
+    - Range 1.4: Best: 4673–4731, Worst: 5058–5085
+    - Range 1.5: Best: 4711–4737, Worst: 5092–5161
+
+    Increasing the range from 1 to 1.4 gradually reduces the number of lines,
+    improving performance without significantly affecting the worst-case. 
+    Multiplying the range by 1.4 helps optimize performance while keeping 
+    results within acceptable margins.
+*/
+
 static int	calculator_range(int size)
 {
 	int	range;
@@ -42,7 +61,7 @@ void	k_sort_phase_one(t_stack *stack_a, t_stack *stack_b)
 	int	range;
 
 	i = 0;
-	range = calculator_range(stack_a->size) * 13 / 10;
+	range = calculator_range(stack_a->size) * 14 / 10;
 	while (stack_a->head)
 	{
 		if (stack_a->head->index <= i)
