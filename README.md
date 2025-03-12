@@ -56,7 +56,7 @@ El programa utiliza diferentes estrategias de ordenación según la cantidad de 
 
 - Para `argv = 3`, se usa una simple comparación y swap si es necesario.
   ```c
-  [`stack_sort_three(stack_a);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
+  [stack_sort_three(stack_a)] (https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
   ```
 - Para `argv = 4`, se emplea una estrategia basada en swaps y rotaciones mínimas.
   ```c
