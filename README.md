@@ -56,24 +56,24 @@ El programa utiliza diferentes estrategias de ordenación según la cantidad de 
 
 - Para `argv = 3`, se usa una simple comparación y swap si es necesario.
   ```c
-  stack_sort_three(stack_a);
+  [`stack_sort_three(stack_a);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
   ```
 - Para `argv = 4`, se emplea una estrategia basada en swaps y rotaciones mínimas.
   ```c
-  stack_sort_four(stack_a, &stack_b);
+  [`stack_sort_four(stack_a, &stack_b);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
   ```
 - Para `argv = 5` a `argv = 8`, se usa una función más estructurada que emplea índices con una mezcla de particionamiento y movimientos optimizados.
   ```c
-  stack_sort_five_and_eight(stack_a, stack_b, lim);
+  [`stack_sort_five_and_eight(stack_a, stack_b, lim);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_01.c)
   ```
 - Para `argv >= 9`, se implementa una estrategia basada en `ksort`, que divide los elementos en grupos de acuerdo a un rango, facilitando el ordenamiento mediante el uso de índices con las operaciones permitidas.
   ```c
-  k_sort_phase_one(stack_a, stack_b);
-  k_sort_phase_two(stack_a, stack_b, size_a);
+  [`k_sort_phase_one(stack_a, stack_b);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_02.c)
+  [`k_sort_phase_two(stack_a, stack_b, size_a);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_02.c)
   ```
   Para generar los índices, se usa la función:
   ```c
-  load_index_with_timsort(t_stack *stack_a);
+  [`load_index_with_timsort(t_stack *stack_a);`](https://github.com/briveraarg/push_swap/blob/main/src/stack_sort_04.c)
   ```
 
 ### Operaciones permitidas
@@ -97,7 +97,7 @@ Para validar este proyecto, se deben realizar pruebas de rendimiento con un núm
 - Para una validación mínima (nota 80), el programa debe ordenar 100 números aleatorios en menos de 700 operaciones.
 - Para una validación máxima y obtener los *bonus*, además de cumplir el primer requisito, también debe ordenar 500 números aleatorios sin superar las 5500 operaciones.
 
-Para hacer pruebas de forma sistematica, puedes usar el siguiente script:
+Para hacer pruebas de forma sistemática, puedes usar el siguiente script:
 
 ```bash
 #!/bin/bash
@@ -167,4 +167,6 @@ Proyecto desarrollado por **Brenda Rivera** como parte del programa de 42 Madrid
 ## Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+
 
